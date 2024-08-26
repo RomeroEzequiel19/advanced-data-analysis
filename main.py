@@ -121,11 +121,20 @@ try:
     print(correlacion_salary_y_performance)
 
     print("GRAFICO DE DISPERSION DE YEAR_WITH_COMPANY vs PERFORMANCE_SCORE")
-    # Gráfico de dispersión de years_with_company vs. performance_score
+    # Gráfico de dispersión de years_with_company vs performance_score
     plt.figure()
     plt.scatter(df['years_with_company'], df['performance_score'], alpha=0.7)
-    plt.title('Years with Company vs. Performance Score')
+    plt.title('Years with Company vs Performance Score')
     plt.xlabel('Years with Company')
+    plt.ylabel('Performance Score')
+    plt.show()
+
+    print("GRAFICO DE DISPERSION DE SALARY vs PERFORMANCE_SCORE")
+    # Gráfico de dispersión de salary vs performance_score
+    plt.figure()
+    plt.scatter(df['salary'], df['performance_score'], alpha=0.7)
+    plt.title('Salary vs Performance Score')
+    plt.xlabel('Salary')
     plt.ylabel('Performance Score')
     plt.show()
 
