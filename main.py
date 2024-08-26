@@ -109,5 +109,15 @@ try:
     empleados_por_departamento = df.groupby('department')['employee_id'].count()
     print(empleados_por_departamento)
 
+    print("CORRELACIÓN ENTRE YEARS_WITH_COMPANY Y PERFORMANCE_SCORE")
+    # Se calcula de correlacioon entre YEARS_WITH_COMPANY Y PERFORMANCE_SCORE
+    correlacion_anios_y_performance = df['years_with_company'].corr(df['performance_score'])
+    print(correlacion_anios_y_performance)
+
+    print("CORRELACIÓN ENTRE SALARY Y PERFORMANCE SCORE")
+    # Se calcula de correlacion entre salary y performance score
+    correlacion_salary_y_performance = df['salary'].corr(df['performance_score'])
+    print(correlacion_salary_y_performance)
+
 except Exception as e:
     print(f"Error al extraer datos: {e}")
