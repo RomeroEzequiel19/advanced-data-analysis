@@ -38,21 +38,13 @@ class ConexionDB:
     def usar_db(self, db_name):
         self.cursor.execute(f"USE {db_name}")
 
-# # Creación de la tabla
-# try:
-#     cursor.execute("""
-#         CREATE TABLE IF NOT EXISTS EmployeePerformance (
-#             id INT PRIMARY KEY AUTO_INCREMENT,
-#             employee_id INT,
-#             department VARCHAR(40),
-#             performance_score FLOAT,
-#             years_with_company INT,
-#             salary FLOAT
-#         )
-#     """)
-# except Exception as e:
-#     print(f"Error al crear la tabla: {e}")    
-
+    # Para la creacion de la tabla
+    def crear_tabla(self, sql_tabla):
+        try:
+            self.cursor.execute(sql_tabla)
+            print("Tabla creada")
+        except Exception as e:
+            print(f"Error al crear la tabla: {e}") 
 
 # # Se insertan los datos desde el archivo csv
 # try:
@@ -160,3 +152,16 @@ db_connection.conectar()
 # Para crea la base de data y la tabla
 ConexionDB.crear_db("CompanyData")
 ConexionDB.usar_db("CompanyData")
+
+consulta_crear_tabla = """
+        CREATE TABLE IF NOT EXISTS EmployeePerformance (
+            id INT PRIMARY KEY AUTO_INCREMENT,
+            employee_id INT,
+            department VARCHAR(40),
+            performance_score FLOAT,
+            years_with_company INT,
+            salary FLOAT
+        )
+    """
+
+ConexionDB.crear_tabla(consulta_crear_tabla)
