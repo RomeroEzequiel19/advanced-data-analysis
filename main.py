@@ -95,24 +95,6 @@ class Analisis:
     def calcular_desviacion_estandar(self, columna):
         return self.df[columna].std()
 
-
-#     print("CÁLCULOS DEL SALARY")
-
-#     print("MEDIA")
-#     # Se calcula la media del salary
-#     media_salary = df['salary'].mean()
-#     print(media_salary)
-
-#     print("MEDIANA")
-#     # Se calcula la mediana del salary
-#     mediana_salary = df['salary'].median()
-#     print(mediana_salary)
-
-#     print("DESVIACIÓN ESTÁNDAR")
-#     # Se calcula la desviación estándar del salary
-#     desviacion_estandar_salary = df['salary'].std()
-#     print(desviacion_estandar_salary)
-
 #     print("CANTIDAD DE EMPLEADOS POR DEPARTAMENTO")
 #     # Se calcula el número de empleados por departamento
 #     empleados_por_departamento = df.groupby('department')['employee_id'].count()
@@ -197,4 +179,22 @@ if(df is not None):
     # Se calcula la desviación estándar del performance_score
     desviacion_estandar_performance_score = analitica.calcular_desviacion_estandar("performance_score")
     print(desviacion_estandar_performance_score)
+
+
+    print("CÁLCULOS DEL SALARY")
+
+    print("MEDIA")
+    # Se calcula la media del salary
+    media_salary = analitica.calcular_media("salary")
+    print(media_salary)
+
+    print("MEDIANA")
+    # Se calcula la mediana del salary
+    mediana_salary = analitica.calcular_mediana("salary")
+    print(mediana_salary)
+
+    print("DESVIACIÓN ESTÁNDAR")
+    # Se calcula la desviación estándar del salary
+    desviacion_estandar_salary = analitica.calcular_desviacion_estandar("salary")
+    print(desviacion_estandar_salary)
 
