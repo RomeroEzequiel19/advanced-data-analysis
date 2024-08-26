@@ -80,22 +80,20 @@ class ConexionDB:
             return None
 
 
-#     print("CÁLCULOS DEL PERFORMANCE SCORE")
+# Clase para realizar los analisis de datos
+class Analisis:
 
-#     # Se calcula la media del performance_score
-#     print("MEDIA")
-#     media_performance_score = df['performance_score'].mean()
-#     print(media_performance_score)
+    def __init__(self, df):
+        self.df = df
 
-#     print("MEDIANA")
-#     # Se calcula la mediana del performance_score
-#     mediana_performance_score = df['performance_score'].median()
-#     print(mediana_performance_score)
-
-#     print("DESVIACIÓN ESTÁNDAR")
-#     # Se calcula la desviación estándar del performance_score
-#     desviacion_estandar_performance_score = df['performance_score'].std()
-#     print(desviacion_estandar_performance_score)
+    def calcular_media(self, columna):
+        return self.df[columna].mean()
+    
+    def calcular_mediana(self, columna):
+        return self.df[columna].median()
+    
+    def calcular_desviacion_estandar(self, columna):
+        return self.df[columna].std()
 
 
 #     print("CÁLCULOS DEL SALARY")
@@ -178,3 +176,25 @@ db_connection.insertar_datos("EmployeePerformance", "EmployeePerformance.csv")
 
 # Para realiza la consulta a la base de datos
 df = db_connection.consulta("SELECT * FROM EmployeePerformance")
+
+if(df is not None):
+
+    analitica = Analisis(df)
+
+
+    # Se calcula la media del performance_score
+    print("CÁLCULOS DEL PERFORMANCE SCORE")
+    print("MEDIA")
+    media_performance_score = analitica.calcular_media("performance_score")
+    print(media_performance_score)
+
+    print("MEDIANA")
+    # Se calcula la mediana del performance_score
+    mediana_performance_score = analitica.calcular_mediana("performance_score")
+    print(mediana_performance_score)
+
+    print("DESVIACIÓN ESTÁNDAR")
+    # Se calcula la desviación estándar del performance_score
+    desviacion_estandar_performance_score = analitica.calcular_desviacion_estandar("performance_score")
+    print(desviacion_estandar_performance_score)
+
