@@ -1,6 +1,7 @@
 import mysql.connector
 import csv
 import pandas as pd
+import matplotlib.pyplot as plt
 
 # Conexión a la BD
 try:
@@ -110,7 +111,7 @@ try:
     print(empleados_por_departamento)
 
     print("CORRELACIÓN ENTRE YEARS_WITH_COMPANY Y PERFORMANCE_SCORE")
-    # Se calcula de correlacioon entre YEARS_WITH_COMPANY Y PERFORMANCE_SCORE
+    # Se calcula de correlacion entre YEARS_WITH_COMPANY Y PERFORMANCE_SCORE
     correlacion_anios_y_performance = df['years_with_company'].corr(df['performance_score'])
     print(correlacion_anios_y_performance)
 
@@ -118,6 +119,15 @@ try:
     # Se calcula de correlacion entre salary y performance score
     correlacion_salary_y_performance = df['salary'].corr(df['performance_score'])
     print(correlacion_salary_y_performance)
+
+    print("GRAFICO DE DISPERSION DE YEAR_WITH_COMPANY vs PERFORMANCE_SCORE")
+    # Gráfico de dispersión de years_with_company vs. performance_score
+    plt.figure()
+    plt.scatter(df['years_with_company'], df['performance_score'], alpha=0.7)
+    plt.title('Years with Company vs. Performance Score')
+    plt.xlabel('Years with Company')
+    plt.ylabel('Performance Score')
+    plt.show()
 
 except Exception as e:
     print(f"Error al extraer datos: {e}")
