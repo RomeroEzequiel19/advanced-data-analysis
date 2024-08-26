@@ -70,32 +70,15 @@ class ConexionDB:
             print(f"Error al insertar datos: {e}")
 
 
-# # Se insertan los datos desde el archivo csv
-# try:
-#     with open("EmployeePerformance.csv", mode="r") as data:
-#         info = csv.reader(data)
-#         # Para que salte la primer linea
-#         next(info)
-#         # Recorre por todos los elementos
-#         for row in info:
-#             cursor.execute(
-#                 """
-#                 INSERT INTO employeeperformance (employee_id, department, performance_score, years_with_company, salary)
-#                 VALUES (%s, %s, %s, %s, %s)
-#                 """, 
-#                 (row[1], row[2], row[3], row[4], row[5]))
-                
-#         # Luego se confirman los datos ingresados en la bd
-#         conexion.commit()
-#         print("Datos insertados correctamente")
-# except Exception as e:
-#     print(f"Error al insertar datos: {e}")
+    # Se realiza la consulta a la base de datos con pandas
+    def consulta(self, sql):
+        try:
+            df = pd.read_sql(sql, self.conexion)
+            return df
+        except Exception as e:
+            print(f"Error al extraer datos: {e}")
+            return None
 
-
-# # Se realiza la consulta a la base de datos con pandas
-# try:
-#     consulta = "SELECT * FROM EmployeePerformance"
-#     df = pd.read_sql(consulta, conexion)
 
 #     print("CÁLCULOS DEL PERFORMANCE SCORE")
 
@@ -192,3 +175,6 @@ db_connection.crear_tabla(consulta_crear_tabla)
 
 # Para insertar los datos desde el archivo
 db_connection.insertar_datos("EmployeePerformance", "EmployeePerformance.csv")
+
+# Para realiza la consulta a la base de datos
+df = db_connection.consulta("SELECT * FROM EmployeePerformance")
