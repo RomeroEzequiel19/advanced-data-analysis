@@ -94,21 +94,13 @@ class Analisis:
     
     def calcular_desviacion_estandar(self, columna):
         return self.df[columna].std()
+    
+    def contar_empleados_departamento(self):
+        return self.df.groupby('department')['employee_id'].count()
+    
+    def calcular_correlacion(self, columna1, columna2):
+        return self.df[columna1].corr(self.df[columna2])
 
-#     print("CANTIDAD DE EMPLEADOS POR DEPARTAMENTO")
-#     # Se calcula el número de empleados por departamento
-#     empleados_por_departamento = df.groupby('department')['employee_id'].count()
-#     print(empleados_por_departamento)
-
-#     print("CORRELACIÓN ENTRE YEARS_WITH_COMPANY Y PERFORMANCE_SCORE")
-#     # Se calcula de correlacion entre YEARS_WITH_COMPANY Y PERFORMANCE_SCORE
-#     correlacion_anios_y_performance = df['years_with_company'].corr(df['performance_score'])
-#     print(correlacion_anios_y_performance)
-
-#     print("CORRELACIÓN ENTRE SALARY Y PERFORMANCE SCORE")
-#     # Se calcula de correlacion entre salary y performance score
-#     correlacion_salary_y_performance = df['salary'].corr(df['performance_score'])
-#     print(correlacion_salary_y_performance)
 
 #     print("GRAFICO DE DISPERSION DE YEAR_WITH_COMPANY vs PERFORMANCE_SCORE")
 #     # Gráfico de dispersión de years_with_company vs performance_score
@@ -198,3 +190,18 @@ if(df is not None):
     desviacion_estandar_salary = analitica.calcular_desviacion_estandar("salary")
     print(desviacion_estandar_salary)
 
+
+    print("CANTIDAD DE EMPLEADOS POR DEPARTAMENTO")
+    # Se calcula el número de empleados por departamento
+    empleados_por_departamento = analitica.contar_empleados_departamento()
+    print(empleados_por_departamento)
+
+    print("CORRELACIÓN ENTRE YEARS_WITH_COMPANY Y PERFORMANCE_SCORE")
+    # Se calcula de correlacion entre YEARS_WITH_COMPANY Y PERFORMANCE_SCORE
+    correlacion_anios_y_performance = analitica.calcular_correlacion("years_with_company", "performance_score")
+    print(correlacion_anios_y_performance)
+
+    print("CORRELACIÓN ENTRE SALARY Y PERFORMANCE SCORE")
+    # Se calcula de correlacion entre salary y performance score
+    correlacion_salary_y_performance = analitica.calcular_correlacion("salary", "performance_score")
+    print(correlacion_salary_y_performance)
