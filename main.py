@@ -100,28 +100,14 @@ class Analisis:
     
     def calcular_correlacion(self, columna1, columna2):
         return self.df[columna1].corr(self.df[columna2])
-
-
-#     print("GRAFICO DE DISPERSION DE YEAR_WITH_COMPANY vs PERFORMANCE_SCORE")
-#     # Gráfico de dispersión de years_with_company vs performance_score
-#     plt.figure()
-#     plt.scatter(df['years_with_company'], df['performance_score'], alpha=0.7)
-#     plt.title('Years with Company vs Performance Score')
-#     plt.xlabel('Years with Company')
-#     plt.ylabel('Performance Score')
-#     plt.show()
-
-#     print("GRAFICO DE DISPERSION DE SALARY vs PERFORMANCE_SCORE")
-#     # Gráfico de dispersión de salary vs performance_score
-#     plt.figure()
-#     plt.scatter(df['salary'], df['performance_score'], alpha=0.7)
-#     plt.title('Salary vs Performance Score')
-#     plt.xlabel('Salary')
-#     plt.ylabel('Performance Score')
-#     plt.show()
-
-# except Exception as e:
-#     print(f"Error al extraer datos: {e}")
+    
+    def graficar_dispersion(self, columna_x, columna_y, titulo, label_x, label_y):
+        plt.figure()
+        plt.scatter(self.df[columna_x], self.df[columna_y], alpha=0.7)
+        plt.title(titulo)
+        plt.xlabel(label_x)
+        plt.ylabel(label_y)
+        plt.show()
 
 
 # Realizar la conexion a la base de datos
@@ -205,3 +191,13 @@ if(df is not None):
     # Se calcula de correlacion entre salary y performance score
     correlacion_salary_y_performance = analitica.calcular_correlacion("salary", "performance_score")
     print(correlacion_salary_y_performance)
+
+
+    print("GRAFICO DE DISPERSION DE YEAR_WITH_COMPANY vs PERFORMANCE_SCORE")
+    # Gráfico de dispersión de years_with_company vs performance_score
+    analitica.graficar_dispersion('years_with_company', 'performance_score','Years with Company vs Performance Score','Years with Company', 'Performance Score')
+
+
+    print("GRAFICO DE DISPERSION DE SALARY vs PERFORMANCE_SCORE")
+    # Gráfico de dispersión de salary vs performance_score
+    analitica.graficar_dispersion('salary', 'performance_score','Salary vs Performance Score','Salary', 'Performance Score')
