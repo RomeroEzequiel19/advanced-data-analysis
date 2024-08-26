@@ -26,18 +26,17 @@ class ConexionDB:
         except Exception as e:
             print(f"Error en la conexion de la BD: {e}" )
 
-# # Cursor que permite la ejecución de instrucciones sql
-# cursor = conexion.cursor()
+    # Creación de la base de datos
+    def crear_db(self, db_name):
+        try:
+            self.cursor.execute(f"CREATE DATABASE IF NOT EXISTS {db_name}")
+            print("Base de datos creada")
+        except Exception as e:
+            print(f"Error al crear la base de datos: {e}")
 
-# # Creación de la base de datos
-# try:
-#     cursor.execute("CREATE DATABASE IF NOT EXISTS CompanyData")
-#     print("Base de datos creada")
-# except Exception as e:
-#     print(f"Error al crear la base de datos: {e}")
-
-# # Usar la base de datos
-# cursor.execute("USE CompanyData")
+    # Para usar la base de datos
+    def usar_db(self, db_name):
+        self.cursor.execute(f"USE {db_name}")
 
 # # Creación de la tabla
 # try:
@@ -157,3 +156,7 @@ class ConexionDB:
 # Realizar la conexion a la base de datos
 db_connection = ConexionDB(host="localhost", user="root", password="")
 db_connection.conectar()
+
+# Para crea la base de data y la tabla
+ConexionDB.crear_db("CompanyData")
+ConexionDB.usar_db("CompanyData")
