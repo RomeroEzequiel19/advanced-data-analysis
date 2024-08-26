@@ -46,6 +46,30 @@ class ConexionDB:
         except Exception as e:
             print(f"Error al crear la tabla: {e}") 
 
+
+    # Para insertar los datos
+    def insertar_datos(self, nombre_tabla, datos_csv):
+        try:
+            with open(datos_csv, mode="r") as data:
+                info = csv.reader(data)
+                # Para que salte la primer linea
+                next(info)
+                # Recorre por todos los elementos
+                for row in info:
+                    self.cursor.execute(
+                        f"""
+                        INSERT INTO {nombre_tabla} (employee_id, department, performance_score, years_with_company, salary)
+                        VALUES (%s, %s, %s, %s, %s)
+                        """, 
+                        (row[1], row[2], row[3], row[4], row[5]))
+                        
+                # Luego se confirman los datos ingresados en la bd
+                self.conexion.commit()
+                print("Datos insertados correctamente")
+        except Exception as e:
+            print(f"Error al insertar datos: {e}")
+
+
 # # Se insertan los datos desde el archivo csv
 # try:
 #     with open("EmployeePerformance.csv", mode="r") as data:
@@ -150,8 +174,8 @@ db_connection = ConexionDB(host="localhost", user="root", password="")
 db_connection.conectar()
 
 # Para crea la base de data y la tabla
-ConexionDB.crear_db("CompanyData")
-ConexionDB.usar_db("CompanyData")
+db_connection.crear_db("CompanyData")
+db_connection.usar_db("CompanyData")
 
 consulta_crear_tabla = """
         CREATE TABLE IF NOT EXISTS EmployeePerformance (
@@ -164,4 +188,7 @@ consulta_crear_tabla = """
         )
     """
 
-ConexionDB.crear_tabla(consulta_crear_tabla)
+db_connection.crear_tabla(consulta_crear_tabla)
+
+# Para insertar los datos desde el archivo
+db_connection.insertar_datos("EmployeePerformance", "EmployeePerformance.csv")
